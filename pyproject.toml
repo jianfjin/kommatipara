@@ -1,0 +1,18 @@
+[project]
+name = "kommatipara"
+version = "0.1.0"
+description = "ETL demo of dummy client data"
+authors = [
+    {name = "jinj01", email = "jianfjin@gmail.com"},
+]
+dependencies = []
+requires-python = ">=3.8"
+readme = "README.md"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[tool.pdm]
+distribution = true
