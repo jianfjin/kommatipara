@@ -1,0 +1,32 @@
+{
+    "dataset_one": {
+        "name": "client_information",
+        "format": "csv",
+        "path": "dataset_one.csv",
+        "sep": ",",
+        "schema": {
+            "id": "int",
+            "first_name": "str",
+            "last_name": "str",
+            "email": "str",
+            "country": "str"
+        },
+        "filters": {
+            "country": []
+        },
+        "exclude": ["email"]
+    },
+    "dataset_two": {
+        "name": "client_account",
+        "format": "csv",
+        "path": "dataset_two.csv",
+        "sep": ",",
+        "schema": {
+            "id": "int",
+            "btc_a": "str",
+            "cc_t": "str",
+            "cc_n": "long"
+        },
+        "exclude": ["cc_n"]
+    }
+}
