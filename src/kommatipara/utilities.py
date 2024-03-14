@@ -42,6 +42,9 @@ def create_schema(config_model: DatasetConfig) -> StructType:
         logging.error(f"The key is not found: {e}")
 
 def handle_errors(func):
+    """
+    Handle the spark errors.
+    """
     @wraps(func)
     def wrapper(*args, **kwargs):
         try:
