@@ -1,6 +1,6 @@
-[
-    {
-        "name": "dataset_one",
+{
+    "dataset_one": {
+        "name": "client_information",
         "format": "csv",
         "path": "dataset_one.csv",
         "sep": ",",
@@ -16,8 +16,8 @@
         },
         "exclude": ["email"]
     },
-    {
-        "name": "dataset_two",
+    "dataset_two": {
+        "name": "client_account",
         "format": "csv",
         "path": "dataset_two.csv",
         "sep": ",",
@@ -29,4 +29,4 @@
         },
         "exclude": ["cc_n"]
     }
-]
+}

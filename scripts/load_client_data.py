@@ -5,6 +5,7 @@ from pathlib import Path
 
 import logging
 from logging.handlers import RotatingFileHandler
+import argparse
 
 from kommatipara.models import DatasetConfig
 from kommatipara.raw import load_raw_data
@@ -21,6 +22,32 @@ handler = RotatingFileHandler(log_file, maxBytes=1000000, backupCount=5)  # Adju
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 handler.setFormatter(formatter)
 logger.addHandler(handler)
+
+# Parse the arguments to get the file paths and filter
+parser = argparse.ArgumentParser()
+parser.add_argument('dataset_one', type=str)
+parser.add_argument('dataset_two', type=str)
+parser.add_argument('country', type=str)
+args = parser.parse_args()
+
+# get the file path and name of dataset_one.csv
+file1_path = args.dataset_one
+logger.info(f'file1 path: {file1_path}')
+file1_name = Path(file1_path).stem
+logger.info(f'file1 name: {file1_name}')
+
+# get the file path and name of dataset_one.csv
+file2_path = args.dataset_two
+logger.info(f'file2 path: {file2_path}')
+file2_name = Path(file2_path).stem
+logger.info(f'file2 name: {file2_name}')
+
+# get the filter values of the country field
+if args.country:
+    countries = args.country.split(',')
+    logger.info(f'countries: {countries}')
+else:
+    countries = []
 
 # Set the paths
 root_path = str(Path(__file__).parent.parent.resolve())
@@ -42,11 +69,13 @@ except FileNotFoundError as e:
     logger.error(e)
 
 # create the schemas for the tables
-config_model1 = load_config_model(configs[0])
+config_model1 = load_config_model(configs[file1_name])
+config_model1.update(filters={"country": countries})
+logger.info(f"country filter: {config_model1.filters['country']}")
 schema1 = create_schema(config_model1)
 logger.info("Schema for dataset one created successfully.")
 
-config_model2 = load_config_model(configs[1])
+config_model2 = load_config_model(configs[file2_name])
 schema2 = create_schema(config_model2)
 logger.info("Schema for dataset two created successfully.")
 

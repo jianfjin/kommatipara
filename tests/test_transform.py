@@ -64,7 +64,7 @@ class TestFunctions(unittest.TestCase):
 
         # Test when config_model.filters is not None
         config_model.filters = {"country": ["USA"]}
-        result_df = filter_table(df, config_model)
+        result_df = filter_table(df, config_model.filters)
         self.assertEqual(result_df.count(), 1)
 
         # Test when config_model.filters is None

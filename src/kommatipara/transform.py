@@ -29,7 +29,7 @@ def read_table(spark: SparkSession, table_path: str, format: str, config_model: 
     return df
 
 @handle_errors
-def filter_table(df: DataFrame, config_model: DatasetConfig) -> DataFrame:
+def filter_table(df: DataFrame, filters: Dict) -> DataFrame:
     """
     Filter the fields of the dataframe
     :param df: dataframe to be filtered
@@ -37,10 +37,9 @@ def filter_table(df: DataFrame, config_model: DatasetConfig) -> DataFrame:
 
     :return: dataframe filtered
     """
-    if config_model.filters:
-        for c in config_model.filters:
-            values = config_model.filters[c]
-            df.filter(F.col(c).isin(values))
+    if filters:
+        for c in filters:
+            df = df.filter(F.col(c).isin(filters[c]))
     return df
 
 @handle_errors
@@ -93,10 +92,10 @@ def output_data(spark: SparkSession, table_path1: str, table_path2: str,
     df2 = read_table(spark, table_path2, output_format, config_model2)
 
     # Filter df1
-    df1 = filter_table(df1, config_model1)
+    filtered_df1 = filter_table(df1, config_model1.filters)
 
     # Join the dataframes
-    joined_df = join_table(df1, df2, columns_on_join)
+    joined_df = join_table(filtered_df1, df2, columns_on_join)
 
     # Rename the columns
     renamed_df = rename_columns(joined_df, columns_to_rename)

@@ -10,3 +10,7 @@ class DatasetConfig(BaseModel):
     filters: Optional[Dict[str, List[str]]] = None
     exclude: Optional[List[str]] = None
     rename: Optional[Dict[str, str]] = None
+
+    def update(self, **new_data):
+        for field, value in new_data.items():
+            setattr(self, field, value)
