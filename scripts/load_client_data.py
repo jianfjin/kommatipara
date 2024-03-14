@@ -36,7 +36,7 @@ logger.info(f'file1 path: {file1_path}')
 file1_name = Path(file1_path).stem
 logger.info(f'file1 name: {file1_name}')
 
-# get the file path and name of dataset_one.csv
+# get the file path and name of dataset_two.csv
 file2_path = args.dataset_two
 logger.info(f'file2 path: {file2_path}')
 file2_name = Path(file2_path).stem
@@ -79,6 +79,7 @@ config_model2 = load_config_model(configs[file2_name])
 schema2 = create_schema(config_model2)
 logger.info("Schema for dataset two created successfully.")
 
+# Create Spark session
 builder = SparkSession.builder.appName("MyApp") \
     .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension") \
     .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog") \
