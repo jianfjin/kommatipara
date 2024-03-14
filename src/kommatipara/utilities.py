@@ -18,7 +18,7 @@ def load_config_model(config: Dict) -> DatasetConfig:
     try:
         return DatasetConfig(**config)
     except ValidationError as e:
-        print(e)
+        logging.info(e)
 
 def create_schema(config_model: DatasetConfig) -> StructType:
     """
