@@ -50,3 +50,11 @@
 5. Build the project
 
     `pdm build`
+
+## Run the data loading code
+    1. install the package `pip3 install -r requirements.txt` and `pip3 install -e .`
+    2. cd to the `scripts` folder
+    3. in the terminal run 
+        `python3 load_client_data.py ./resources/dataset_one.csv ./resources/dataset_two.csv "United Kingdom,Netherlands"`
+    4. check the exported data in `client_data` folder in the project folder
+    5. the logs are created in etl_demo.log in the project folder

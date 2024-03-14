@@ -1,0 +1,6 @@
+delta_spark==2.0.0
+mockito==1.5.0
+pydantic==2.6.4
+pyspark==3.2.4
+pytest==8.1.1
+pdm==2.12.4
