@@ -46,12 +46,12 @@ class TestFunctions(unittest.TestCase):
         when(self.spark.read).load(...).thenReturn(mock_table)
         # Test when config_model.exclude is not None
         config_model.exclude = ["age"]
-        result_df = read_table(self.spark, "/dummy/path", "csv", config_model)
+        result_df = read_table(self.spark, "/dummy/path", "csv", config_model.exclude)
         self.assertEqual(result_df.columns, ["id", "name"])
 
         # Test when config_model.exclude is None
         config_model.exclude = None
-        result_df = read_table(self.spark, "/dummy/path", "csv", config_model)
+        result_df = read_table(self.spark, "/dummy/path", "csv", config_model.exclude)
         self.assertEqual(result_df.columns, ["id", "name", "age"])
 
     @pytest.mark.skip(reason="the hadoop config is not correct")

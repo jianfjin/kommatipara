@@ -10,7 +10,7 @@ from kommatipara.utilities import handle_errors
 from kommatipara.raw import save_to_file
 
 @handle_errors
-def read_table(spark: SparkSession, table_path: str, format: str, config_model: DatasetConfig) -> DataFrame:
+def read_table(spark: SparkSession, table_path: str, format: str, exclude: List[str]) -> DataFrame:
     """
     Read the data file
     :param spark: SparkSession
@@ -22,8 +22,8 @@ def read_table(spark: SparkSession, table_path: str, format: str, config_model: 
     """
     df = spark.read.format(format).load(f"{table_path}")
 
-    if config_model.exclude:
-        columns_to_drop = config_model.exclude
+    if exclude:
+        columns_to_drop = exclude
         df = df.drop(*columns_to_drop)
     
     return df
@@ -88,8 +88,8 @@ def output_data(spark: SparkSession, table_path1: str, table_path2: str,
     :param mode: the write mode 
     """
     # Read the tables
-    df1 = read_table(spark, table_path1, output_format, config_model1)
-    df2 = read_table(spark, table_path2, output_format, config_model2)
+    df1 = read_table(spark, table_path1, output_format, config_model1.exclude)
+    df2 = read_table(spark, table_path2, output_format, config_model2.exclude)
 
     # Filter df1
     filtered_df1 = filter_table(df1, config_model1.filters)
