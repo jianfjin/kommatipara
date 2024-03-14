@@ -2,6 +2,9 @@ from pydantic import BaseModel, Field, ConfigDict, TypeAdapter, ValidationError
 from typing import Dict, List, Optional
 
 class DatasetConfig(BaseModel):
+    """
+    Load the configuration json data to the model and validate the data.
+    """
     name: str
     format: str
     path: str
