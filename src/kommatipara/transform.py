@@ -39,7 +39,7 @@ def filter_table(df: DataFrame, filters: Dict) -> DataFrame:
     """
     if filters:
         for c in filters:
-            df = df.filter(F.col(c).isin(filters[c]))
+            df = df.filter(F.lower(F.col(c)).isin(filters[c]))
     return df
 
 @handle_errors
