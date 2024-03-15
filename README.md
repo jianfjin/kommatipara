@@ -69,3 +69,5 @@
 4. check the exported data in `client_data` folder in the project folder
 
 5. the logs are created in etl_demo.log in the project folder
+
+6. the loaded data can be queried in the jupyter notebook `query_tables.ipynb`
