@@ -51,6 +51,102 @@
 
     `pdm build`
 
+## Structure of the project
+1. scripts
+    
+        reources
+
+        `dataset_one.csv`
+        
+        the source file of dataset one.
+
+        `dataset_two.csv`
+        
+        is the source file of dataset two.
+
+        `config.json`
+        
+        contains the meta data of the source files and is used to create the schema of the source data and further data processing.
+
+    `load_client_data.py` 
+    
+        runs the loading process. It parses the input arguments, creates the logger, starts the spark session and consumes the configuration from config.json. Then the `load_raw_data` function in src/raw.py is called to read and write the source data to the data lake. After that the `output_data` function is called to transform the source data and export the processed data.    
+
+2. src
+
+    `models.py`
+
+    contains a pydantic class `DatasetConfig` to validate the configuration data loaded from config.json.
+
+    `raw.py`
+
+    contains the functions for the staging process.
+    
+        `read_from_file` 
+        
+        reads the source file.
+        
+        `save_to_file` 
+        
+        writes the data to the data lake.
+        
+        `load_raw_data` 
+        
+        calls the read and save functions sequentially.
+
+    `transform.py`
+
+    contains the functions for the transformation process.
+
+        `read_table`
+
+        reads the data from the data lake.
+
+        `filter table`
+
+        filters the data frame by the condition provided.
+
+        `join table`
+
+        joins the data frames on the designated column.
+
+        `rename columns`
+
+        renames the selected columns.
+
+        `output_data`
+
+        calls the transformation functions sequentially and export the processed data.
+
+    `utilities`
+    contains the helping functions.
+        `load_config_model`
+
+        loads the configuration data from json and validate the fields and data types.
+
+        `create_schema`
+
+        creates the schema for the source data to be read by spark.
+
+        `handle_errors`
+
+        a error handling decorator for the data processing functions.
+
+3. tests
+
+    `test_raw.py`
+
+    contains the unit tests of the functions in raw.py.
+
+    `test_transform.py`
+
+    contains the unit tests of the functions in transform.py.
+
+    `test_utilities.py`
+
+    contains the unit tests of the functions in utilities.py.
+
+
 ## Run the data loading code
 1. install the package
 
