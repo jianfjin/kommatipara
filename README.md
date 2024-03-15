@@ -70,7 +70,7 @@
 
     `load_client_data.py` 
     
-    runs the loading process. It parses the input arguments, creates the logger, starts the spark session and consumes the configuration from config.json. Then the `load_raw_data` function in src/raw.py is called to read and write the source data to the data lake. After that the `output_data` function is called to transform the source data and export the processed data.    
+        runs the loading process. It parses the input arguments, creates the logger, starts the spark session and consumes the configuration from config.json. Then the `load_raw_data` function in src/raw.py is called to read and write the source data to the data lake. After that the `output_data` function is called to transform the source data and export the processed data.    
 
 2. src
 
