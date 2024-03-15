@@ -44,7 +44,7 @@ logger.info(f'file2 name: {file2_name}')
 
 # get the filter values of the country field
 if args.country:
-    countries = args.country.split(',')
+    countries = args.country.lower().split(',')
     logger.info(f'countries: {countries}')
 else:
     countries = []
