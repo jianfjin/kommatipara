@@ -120,6 +120,7 @@
 
     `utilities`
     contains the helping functions.
+    
         `load_config_model`
 
         loads the configuration data from json and validate the fields and data types.
